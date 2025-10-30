@@ -40,8 +40,9 @@ public class Combo implements Producto
     {
         return nombreCombo;
     }
+	
 
-    /**
+	/**
      * Retorna el precio del combo.
      * 
      * El precio está basado en aplicarle el descuento del combo al valor de cada uno de los productos.
@@ -54,8 +55,10 @@ public class Combo implements Producto
         {
             precio += i.getPrecio( );
         }
+        
+        precio -= (precio * descuento); // se cambio para que se reste el descuento, y no retorne solo el descuento
 
-        return ( int ) ( precio * descuento );
+        return ( int ) (precio);
     }
 
     /**
@@ -73,5 +76,6 @@ public class Combo implements Producto
 
         return sb.toString( );
     }
+    
 
 }

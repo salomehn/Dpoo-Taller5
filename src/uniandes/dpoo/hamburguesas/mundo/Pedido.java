@@ -18,12 +18,12 @@ public class Pedido
     /**
      * El número de pedidos que se han creado hasta el momento
      */
-    private static int numeroPedidos;
+    public static int numeroPedidos;
 
     /**
      * El número identificador de un pedido
      */
-    private int idPedido;
+    private int idPedido = 0;
 
     /**
      * Los productos que hacen parte del pedido
@@ -48,8 +48,9 @@ public class Pedido
      * @param direccionCliente
      */
     public Pedido( String nombreCliente, String direccionCliente )
-    {
-        this.idPedido = numeroPedidos++;
+    {	
+    	numeroPedidos += 1;
+        this.idPedido = numeroPedidos;
         this.nombreCliente = nombreCliente;
         this.direccionCliente = direccionCliente;
         productos = new ArrayList<Producto>( );
@@ -61,6 +62,7 @@ public class Pedido
      */
     public int getIdPedido( )
     {
+		//System.out.println(idPedido); 
         return idPedido;
     }
 
@@ -72,6 +74,12 @@ public class Pedido
     {
         return nombreCliente;
     }
+    
+    //se agrega ub getter de la lista de productos, para comprobar si se estan añadiendo los productos
+    
+    public ArrayList<Producto> getProductos() {
+		return productos;
+	}
 
     /**
      * Agrega un nuevo producto al pedido
@@ -82,7 +90,8 @@ public class Pedido
         productos.add( nuevoProducto );
     }
 
-    /**
+
+	/**
      * Retorna el precio total del pedido, basado en el valor de cada uno de los productos y en el IVA
      * @return La sumatoria de los precios de los productos con el valor adicional del IVA
      */
@@ -95,13 +104,15 @@ public class Pedido
      * Retorna el precio de los productos del pedido
      * @return La sumatoria de los precios de los productos
      */
-    private int getPrecioNetoPedido( )
+    public int getPrecioNetoPedido( )
     {
         int valor = 0;
+        
         for( Producto item : productos )
         {
             valor += item.getPrecio( );
         }
+        
         return valor;
     }
 
@@ -109,7 +120,7 @@ public class Pedido
      * Retorna el valor del IVA del producto, que corresponde al 19% del precio neto
      * @return
      */
-    private int getPrecioIVAPedido( )
+    public int getPrecioIVAPedido( )
     {
         return ( int ) ( getPrecioNetoPedido( ) * IVA );
     }

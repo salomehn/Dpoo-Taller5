@@ -29,6 +29,7 @@ public class ProductoAjustado implements Producto
     public ProductoAjustado( ProductoMenu productoBase )
     {
         this.productoBase = productoBase;
+        
         agregados = new ArrayList<Ingrediente>( );
         eliminados = new ArrayList<Ingrediente>( );
     }
@@ -38,17 +39,43 @@ public class ProductoAjustado implements Producto
     {
         return productoBase.getNombre( );
     }
+    
+    /* se añaden los metodos para las listas de los ingredientes */
+   
+	
+    public void agregarIngrediente(Ingrediente ingrediente) {
+    	agregados.add(ingrediente);
+    }
+    
+    public void eliminarIngrediente(Ingrediente ingrediente) {
+    	eliminados.add(ingrediente);
+    }
 
-    /**
+
+	
+	 /**
      * Retorna el precio del producto ajustado, que debe ser igual al del producto base, sumándole el precio de los ingredientes adicionales.
      */
     @Override
-    public int getPrecio( )
+    public int getPrecio() 
     {
-        return 0;
+       if (agregados.isEmpty()) {
+    	   
+    	   return productoBase.getPrecio();
+    	   
+       } else {
+    	   int precioTotal = productoBase.getPrecio();
+    	    
+    	   for (Ingrediente ingrediente: agregados) {
+    		   precioTotal += ingrediente.getCostoAdicional();
+    	   }
+    	   
+    	   return precioTotal;
+       }
     }
 
-    /**
+
+	/**
      * Genera el texto que debe aparecer en la factura.
      * 
      * El texto incluye el producto base, los ingredientes adicionales con su costo, los ingredientes eliminados, y el precio total
@@ -57,7 +84,7 @@ public class ProductoAjustado implements Producto
     public String generarTextoFactura( )
     {
         StringBuffer sb = new StringBuffer( );
-        sb.append( productoBase );
+        sb.append( productoBase.getNombre() + "                " +  productoBase.getPrecio()); //cambiado para que sacar el nombre y precio de producto base
         for( Ingrediente ing : agregados )
         {
             sb.append( "    +" + ing.getNombre( ) );
@@ -72,5 +99,9 @@ public class ProductoAjustado implements Producto
 
         return sb.toString( );
     }
+    
+    
 
 }
+
+
