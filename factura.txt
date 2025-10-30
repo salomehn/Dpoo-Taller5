@@ -1,0 +1,13 @@
+Cliente: Mariana
+Dirección: Calle 128 #75-67
+----------------
+todoterreno;                25000    +pepinillos                2500    -lechuga            27500
+Combo corral queso
+ Descuento: 0.1
+            23850
+wrap de lomo;
+            22000
+----------------
+Precio Neto:  73350
+IVA:          13936
+Precio Total: 87286
