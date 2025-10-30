@@ -1,0 +1,11 @@
+Cliente: Juan
+Dirección: Carrera 10 #07-27
+----------------
+wrap de lomo;
+            22000
+todoterreno;
+            25000
+----------------
+Precio Neto:  47000
+IVA:          8930
+Precio Total: 55930

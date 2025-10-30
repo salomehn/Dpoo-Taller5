@@ -21,7 +21,7 @@ public class Restaurante
     /**
      * La ruta a la carpeta donde se almacenan las facturas
      */
-    private static final String CARPETA_FACTURAS = "./facturas/";
+    private static final String CARPETA_FACTURAS = "data/facturas";
 
     /**
      * La primera parte del nombre de los archivos de facturas
@@ -102,8 +102,10 @@ public class Restaurante
             throw new NoHayPedidoEnCursoException( );
 
         String nombreArchivo = PREFIJO_FACTURAS + pedidoEnCurso.getIdPedido( ) + ".txt";
-        pedidoEnCurso.guardarFactura( new File( CARPETA_FACTURAS + nombreArchivo ) );
+        pedidoEnCurso.guardarFactura(new File( CARPETA_FACTURAS, nombreArchivo ));
         pedidoEnCurso = null;
+ 
+        
     }
 
     /**

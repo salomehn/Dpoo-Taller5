@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterEach;
@@ -147,28 +146,28 @@ public class PedidoTest {
 	
 	@Test
 	@DisplayName("Probando conseguir la factura del pedido")
-	void testGuardarFactura(){
-		
-		File archivo = new File("factura.txt");
-		
-		try {
-			pedido.guardarFactura(archivo);
+	void testGuardarFactura() {
 
-			String linea = Files.readString(Paths.get("factura.txt"));
-			
-			for(Producto producto : pedido.getProductos()) {
-				assertTrue(linea.contains(producto.generarTextoFactura()));
-			}
+	    File carpeta = new File("data/facturas");
+	    File archivo = new File("data/facturas/factura.txt");
+	    
+	    if (!carpeta.exists()) {
+	        carpeta.mkdirs();
+	    }
+	    
+	    try {
+	        // Borra el archivo antiguo
+	        Files.deleteIfExists(archivo.toPath());
+	        
+	        pedido.guardarFactura(archivo);
+	        String linea = Files.readString(archivo.toPath());
+	        for (Producto producto : pedido.getProductos()) {
+	            assertTrue(linea.contains(producto.generarTextoFactura()));
+	        }
 
-		}
-		
-		catch(IOException e){
-			System.err.println("No se encontro el archivo");
-		}
-		
-	}
-	
-
-	
+	    } catch (IOException e) {
+	        System.err.println("No se encontró el archivo: " + archivo.getAbsolutePath());
+	    }
+	}	
 
 }
